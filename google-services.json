@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "591274877463",
+    "project_id": "call-demo-b3572",
+    "storage_bucket": "call-demo-b3572.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:591274877463:android:61480ccfbef4acddd37252",
+        "android_client_info": {
+          "package_name": "com.kaibo1114.calldemo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIPufNAXKIdIzH-B18kX5TYv1pdLmwJd8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
