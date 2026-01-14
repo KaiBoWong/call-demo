@@ -16,6 +16,16 @@
    npm run android
    ```
 
+4. Login as a User
+
+   Person 1
+   Username: 123
+   password: with any password
+
+   Person 2
+   Username: 1234
+   password: with any password
+
 ## Call Logic
 
 1) **Caller flow**
