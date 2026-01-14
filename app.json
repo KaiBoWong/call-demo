@@ -73,6 +73,14 @@
           "useFrameworks": "static",
             "forceStaticLinking": ["RNFBApp", "RNFBAuth", "RNFBFirestore"]
           }
+        },
+        {
+          "android": {
+            "extraInclusionProperties": {
+              "showWhenLocked": true,
+              "turnScreenOn": true
+            }
+          }
         }
       ],
       "./plugins/withNotifeeAndroid.js"

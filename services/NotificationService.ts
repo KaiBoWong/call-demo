@@ -2,6 +2,7 @@ import notifee, {
   AndroidCategory,
   AndroidImportance,
   AndroidLaunchActivityFlag,
+  AndroidVisibility,
   EventType,
 } from "@notifee/react-native"
 import AsyncStorage from "@react-native-async-storage/async-storage"
@@ -42,7 +43,8 @@ export class NotificationService {
       name: "Incoming Calls",
       importance: AndroidImportance.HIGH,
       vibration: true,
-      sound: "default",
+      bypassDnd: true,
+      visibility: AndroidVisibility.PUBLIC,
     })
 
     // ✅ 冷启动时立即消费一次
@@ -299,9 +301,9 @@ messaging().setBackgroundMessageHandler(async (remoteMessage) => {
 
         // ✅ 全屏意图 - 这会唤醒应用
         fullScreenAction: {
-          id: "incoming_call_full",
+          id: "default",
+          // 这里的 launchActivity 是关键，它会唤醒你的 App
           launchActivity: "default",
-          launchActivityFlags: [AndroidLaunchActivityFlag.SINGLE_TOP],
         },
 
         pressAction: { id: "default", launchActivity: "default" },

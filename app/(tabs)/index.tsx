@@ -18,7 +18,6 @@ import {
 import { useEffect, useState } from "react"
 import {
   ActivityIndicator,
-  Alert,
   FlatList,
   StyleSheet,
   Text,
@@ -31,7 +30,7 @@ import Toast from "react-native-toast-message"
 import { sendFCMNotification } from "../../services/fcmService"
 import { useSession } from "../session/SessionProvider"
 
-const ACCENT = "#0A84FF"
+const ACCENT = "#0ea5e9"
 
 type ContactPerson = {
   id: string
@@ -127,18 +126,33 @@ export default function UserListScreen() {
 
   const addContact = async () => {
     if (!username.trim()) {
-      Alert.alert("Error", "Please enter a username")
+      Toast.show({
+        type: "error",
+        text1: "Error",
+        text2: "Please enter a username",
+        props: { id: Date.now() },
+      })
       return
     }
 
     if (!phoneNumber.trim()) {
-      Alert.alert("Error", "Please enter a phone number")
+      Toast.show({
+        type: "error",
+        text1: "Error",
+        text2: "Please enter a phone number",
+        props: { id: Date.now() },
+      })
       return
     }
 
     const phoneRegex = /^[0-9+\-\s()]+$/
     if (!phoneRegex.test(phoneNumber)) {
-      Alert.alert("Error", "Please enter a valid phone number")
+      Toast.show({
+        type: "error",
+        text1: "Error",
+        text2: "Please enter a valid phone number",
+        props: { id: Date.now() },
+      })
       return
     }
 
@@ -153,10 +167,20 @@ export default function UserListScreen() {
 
       setUsername("")
       setPhoneNumber("")
-      Alert.alert("Success", "Contact added successfully!")
+      Toast.show({
+        type: "success",
+        text1: "Success",
+        text2: "Contact added successfully!",
+        props: { id: Date.now() },
+      })
     } catch (error) {
       console.error("Error adding contact:", error)
-      Alert.alert("Error", "Failed to add contact. Please try again.")
+      Toast.show({
+        type: "error",
+        text1: "Error",
+        text2: "Failed to add contact. Please try again.",
+        props: { id: Date.now() },
+      })
     }
   }
 
@@ -549,33 +573,39 @@ export default function UserListScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#F3F4F7",
+    backgroundColor: "#ffffff",
   },
-  container: { flex: 1, paddingHorizontal: 20, paddingBottom: 16, gap: 16 },
+  container: {
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingBottom: 16,
+    gap: 16,
+    backgroundColor: "#ffffff",
+  },
   headerRow: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     marginTop: 4,
   },
-  title: { fontSize: 28, fontWeight: "700", color: "#111827" },
-  subtitle: { fontSize: 15, color: "#6B7280", marginTop: 4 },
+  title: { fontSize: 28, fontWeight: "700", color: "#0f172a" },
+  subtitle: { fontSize: 15, color: "#475569", marginTop: 4 },
   headerActions: { flexDirection: "row", alignItems: "center", gap: 10 },
   logoutBtn: {
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    paddingVertical: 8,
-    paddingHorizontal: 10,
-    borderRadius: 12,
-    backgroundColor: "#ed0e42ff",
+    paddingVertical: 9,
+    paddingHorizontal: 12,
+    borderRadius: 14,
+    backgroundColor: ACCENT,
   },
-  logoutText: { color: "#ffff", fontSize: 14, fontWeight: "600" },
+  logoutText: { color: "#ffffff", fontSize: 14, fontWeight: "600" },
   badge: {
     width: 44,
     height: 44,
     borderRadius: 14,
-    backgroundColor: "rgba(10,132,255,0.12)",
+    backgroundColor: "rgba(14,165,233,0.14)",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -591,15 +621,15 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   cardHeader: { gap: 2 },
-  cardTitle: { fontSize: 17, fontWeight: "600", color: "#111827" },
-  cardHint: { fontSize: 13, color: "#8E8E93" },
+  cardTitle: { fontSize: 17, fontWeight: "700", color: "#0f172a" },
+  cardHint: { fontSize: 13, color: "#6b7280" },
   inputRow: {
     flexDirection: "row",
     alignItems: "center",
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F8FAFC",
+    borderColor: "#e2e8f0",
+    backgroundColor: "#f8fafc",
     paddingHorizontal: 12,
   },
   inputIcon: { marginRight: 8 },
@@ -607,7 +637,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 12,
     fontSize: 16,
-    color: "#111827",
+    color: "#0f172a",
   },
   primaryBtn: {
     flexDirection: "row",
@@ -618,7 +648,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     shadowColor: ACCENT,
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.2,
     shadowRadius: 8,
     elevation: 2,
   },
@@ -630,25 +660,25 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 14,
     borderRadius: 16,
-    shadowColor: "#000",
+    shadowColor: "rgba(14,165,233,0.4)",
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.06,
+    shadowOpacity: 0.14,
     shadowRadius: 10,
-    elevation: 2,
+    elevation: 3,
   },
   avatar: {
     width: 44,
     height: 44,
     borderRadius: 12,
-    backgroundColor: "rgba(10,132,255,0.12)",
+    backgroundColor: "rgba(14,165,233,0.12)",
     alignItems: "center",
     justifyContent: "center",
     marginRight: 12,
   },
   avatarText: { color: ACCENT, fontSize: 18, fontWeight: "700" },
   meta: { flex: 1, gap: 3 },
-  name: { fontSize: 17, fontWeight: "600", color: "#111827" },
-  subtext: { fontSize: 13, color: "#8E8E93" },
+  name: { fontSize: 17, fontWeight: "600", color: "#0f172a" },
+  subtext: { fontSize: 13, color: "#6b7280" },
   callActions: { flexDirection: "row", alignItems: "center", gap: 8 },
   callPill: {
     minWidth: 84,
@@ -660,7 +690,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 6,
   },
-  callPillAudio: { backgroundColor: "rgba(10,132,255,0.14)" },
+  callPillAudio: { backgroundColor: "rgba(14,165,233,0.14)" },
   callPillVideo: { backgroundColor: "rgba(52,199,89,0.16)" },
   callPillLabel: { color: "#0F172A", fontSize: 13, fontWeight: "600" },
   callPillDisabled: { opacity: 0.6 },
