@@ -66,6 +66,7 @@
           }
         }
       ],
+      // 如果ios 不可以firebase 放这个
       [
         "expo-build-properties",
         {
@@ -83,6 +84,7 @@
           }
         }
       ],
+      //
       "./plugins/withNotifeeAndroid.js"
     ],
     "experiments": {
